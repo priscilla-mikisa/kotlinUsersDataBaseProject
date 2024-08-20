@@ -7,7 +7,6 @@ import androidx.room.RoomDatabase
 import com.akirachix.mycontacts.model.Contact
 
 @Database(entities = arrayOf(Contact::class), version = 1)
-
 abstract class ContactsDataBase: RoomDatabase() {
 
     abstract fun getContactDao(): ContactDao
