@@ -1,5 +1,7 @@
 package com.akirachix.mycontacts.ui
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -12,7 +14,7 @@ import com.akirachix.mycontacts.model.Contact
 import com.akirachix.mycontacts.databinding.ContactListItemBinding
 import com.akirachix.mycontacts.viewModel.ContactsViewModel
 
-class ContactsAdapter(var contactsList: List<Contact>):
+class ContactsAdapter(var contactsList: List<Contact>, val context: Context):
     RecyclerView.Adapter<ContactsViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactsViewHolder {
        val binding = ContactListItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
@@ -24,6 +26,11 @@ class ContactsAdapter(var contactsList: List<Contact>):
         holder.binding.tvName.text = contact.name
         holder.binding.tvPhoneNumber.text = contact.phoneNumber
         holder.binding.tvEmail.text = contact.email
+        holder.binding.cvContacts.setOnClickListener {
+            val  intent = Intent(context, ViewContactActivity::class.java)
+            intent.putExtra("Contact_Id", contact.contactId)
+            context.startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int {

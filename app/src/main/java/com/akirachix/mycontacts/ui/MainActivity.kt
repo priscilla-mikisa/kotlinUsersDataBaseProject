@@ -32,9 +32,10 @@ class MainActivity : AppCompatActivity() {
                 contactList ->
             displayContacts(contactList)
         }
+
     }
     fun displayContacts(contactsList: List<Contact>){
-          val contactsAdapter = ContactsAdapter(contactsList )
+          val contactsAdapter = ContactsAdapter(contactsList, this)
            binding.rvContacts.adapter = contactsAdapter
 
 
