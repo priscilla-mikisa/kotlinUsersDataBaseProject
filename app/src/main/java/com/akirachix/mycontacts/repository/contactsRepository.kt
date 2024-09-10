@@ -9,14 +9,25 @@ import kotlinx.coroutines.withContext
 
 class contactsRepository {
     val dataBase = ContactsDataBase.getDataBase(ContactsApp.appContext)
+    val contactDao =  dataBase.getContactDao()
 
     suspend fun saveContact(contact: Contact){
         withContext(Dispatchers.IO){
-            dataBase.getContactDao().insertContact(contact)
+            contactDao.insertContact(contact)
+
         }
     }
 
     fun getAllContacts():LiveData<List<Contact>>{
-        return  dataBase.getContactDao().getAllContacts()
+        return  contactDao.getAllContacts()
+    }
+
+    fun getContactById(contactId:Int):LiveData<Contact>{
+        return  contactDao.getContactById(contactId)
+    }
+    suspend fun updateContact(contact: Contact){
+        withContext(Dispatchers.IO){
+            contactDao.updateContact(contact)
+        }
     }
 }
